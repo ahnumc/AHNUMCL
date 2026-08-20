@@ -2,6 +2,16 @@
 
 AHNUMCL follows [Semantic Versioning 2.0.0](https://semver.org/).
 
+## 1.0.5
+
+`2026-08-19`
+
+- 🌟 Restore AHNUMC server pack auto import in instance installation flows.
+- 🚀 Improve responsiveness by avoiding blocking version and instance install operations and reducing nested modal rendering.
+- 🐛 Preserve the nested dependency modal flow and defer side effects from state updates for more reliable resource installation.
+- 🐛 Smooth bursty task speed reporting and keep download task behavior more stable under load.
+- 🐛 Remove the LittleSkin login entry from account options.
+
 ## 1.0.4
 
 `2026-08-17`
