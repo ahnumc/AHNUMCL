@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 import { Section } from "@/components/common/section";
 import ResourceDownloader from "@/components/resource-downloader";
-import { OtherResourceType } from "@/enums/resource";
+import { OtherResourceSource, OtherResourceType } from "@/enums/resource";
 
 export const ResourcePage = () => {
   const router = useRouter();
@@ -29,6 +29,7 @@ export const ResourcePage = () => {
       >
         <ResourceDownloader
           resourceType={resourceType}
+          initialDownloadSource={OtherResourceSource.Modrinth}
           displayInModal={false}
         />
       </Box>
