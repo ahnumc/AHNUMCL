@@ -640,6 +640,13 @@
           "description": "When disabled, the launcher will use the system proxy to download resources automatically"
         }
       }
+    },
+    "terracotta": {
+      "title": "Terracotta",
+      "publicNodes": {
+        "title": "Public nodes",
+        "description": "One Terracotta public node per line. Leave empty to use Terracotta defaults."
+      }
     }
   },
   "DownloadSpecificResourceModal": {
@@ -1264,6 +1271,10 @@
           "title": "Quick Switch for Accounts & Instances",
           "description": "When enabled, clicking the switch button on the launch page allows direct selection of accounts and instances instead of navigating to another page."
         },
+        "showMultiplayerButton": {
+          "title": "Show Multiplayer Button",
+          "description": "Show or hide the Terracotta multiplayer button on the launch page"
+        },
         "autoDownloadJava": {
           "title": "Auto-download Suitable Java Runtime",
           "description": "When enabled, if no suitable Java runtime is available when creating a new instance, it will be installed automatically to a dedicated directory"
@@ -1771,7 +1782,8 @@
   "LaunchPage": {
     "button": {
       "launch": "Launch Game",
-      "instanceSettings": "Instance Settings"
+      "instanceSettings": "Instance Settings",
+      "multiplayer": "Terracotta Multiplayer"
     },
     "SwitchButton": {
       "tooltip": {
@@ -1785,6 +1797,36 @@
       "noSelectedPlayer": "No player selected",
       "noSelectedGame": "No game instance selected"
     }
+  },
+  "TerracottaPage": {
+    "title": "Terracotta Multiplayer",
+    "download": "Download Terracotta",
+    "update": "Update",
+    "start": "Start",
+    "stop": "Stop",
+    "refresh": "Refresh",
+    "running": "Running",
+    "stopped": "Stopped",
+    "version": "Installed version: {{version}}",
+    "host": "Host a room",
+    "join": "Join a room",
+    "roomCode": "Room code",
+    "lanHint": "Open your Minecraft world to LAN (Esc → Open to LAN) and choose a port before creating a room.",
+    "roomCodeValue": "Room code: {{roomCode}}",
+    "copyRoomCode": "Copy room code",
+    "downloadProgress": "Download progress: {{progress}}%",
+    "error": "Terracotta operation failed",
+    "sessionStatus": "Session status",
+    "notInRoom": "Not in a room",
+    "connecting": "Connecting",
+    "inRoom": "In a room",
+    "sessionError": "Session error",
+    "serverAddressValue": "Server address: {{address}}",
+    "back": "Back",
+    "openLanTitle": "Open your world to LAN",
+    "players": "Players",
+    "noPlayers": "No players connected",
+    "closeRoom": "Close room"
   },
   "LaunchProcessModal": {
     "header": {

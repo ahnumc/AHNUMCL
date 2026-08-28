@@ -640,6 +640,13 @@
           "description": "無効時、起動器はシステムプロキシで自動的にリソースをダウンロードします"
         }
       }
+    },
+    "terracotta": {
+      "title": "Terracotta",
+      "publicNodes": {
+        "title": "公開ノード",
+        "description": "Terracotta の公開ノードを1行に1つ入力します。空欄の場合はデフォルトを使用します。"
+      }
     }
   },
   "DownloadSpecificResourceModal": {
@@ -1264,6 +1271,10 @@
           "title": "クイックスイッチ",
           "description": "起動ページにアカウントとインスタンスの直接選択が可能。"
         },
+        "showMultiplayerButton": {
+          "title": "マルチプレイボタンを表示",
+          "description": "起動ページの Terracotta マルチプレイボタンを表示または非表示にします"
+        },
         "autoDownloadJava": {
           "title": "適切な Java ランタイムを自動ダウンロード",
           "description": "有効にすると、新しいインスタンス作成時に適切な Java ランタイムがない場合、専用ディレクトリに自動でインストールします"
@@ -1771,7 +1782,8 @@
   "LaunchPage": {
     "button": {
       "launch": "ゲーム起動",
-      "instanceSettings": "インスタンス設定"
+      "instanceSettings": "インスタンス設定",
+      "multiplayer": "Terracotta マルチプレイ"
     },
     "SwitchButton": {
       "tooltip": {
@@ -1785,6 +1797,36 @@
       "noSelectedPlayer": "キャラクターを選択していない",
       "noSelectedGame": "インスタンスを選択していない"
     }
+  },
+  "TerracottaPage": {
+    "title": "Terracotta マルチプレイ",
+    "download": "Terracotta をダウンロード",
+    "update": "更新",
+    "start": "起動",
+    "stop": "停止",
+    "refresh": "更新",
+    "running": "実行中",
+    "stopped": "停止",
+    "version": "インストール済みバージョン: {{version}}",
+    "host": "ルームを作成",
+    "join": "ルームに参加",
+    "roomCode": "ルームコード",
+    "lanHint": "Minecraft のワールドで Esc → LAN に公開を選び、ポートを指定してからルームを作成してください。",
+    "roomCodeValue": "ルームコード: {{roomCode}}",
+    "copyRoomCode": "ルームコードをコピー",
+    "downloadProgress": "ダウンロード進捗: {{progress}}%",
+    "error": "Terracotta 操作に失敗しました",
+    "sessionStatus": "セッション状態",
+    "notInRoom": "ルーム未参加",
+    "connecting": "接続中",
+    "inRoom": "ルーム参加中",
+    "sessionError": "セッションエラー",
+    "serverAddressValue": "サーバーアドレス: {{address}}",
+    "back": "戻る",
+    "openLanTitle": "ワールドを LAN に公開",
+    "players": "プレイヤー",
+    "noPlayers": "接続中のプレイヤーはいません",
+    "closeRoom": "ルームを閉じる"
   },
   "LaunchProcessModal": {
     "header": {

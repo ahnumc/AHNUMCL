@@ -343,6 +343,8 @@ structstruck::strike! {
         #[default = true]
         pub launch_page_quick_switch: bool,
         #[default = true]
+        pub show_multiplayer_button: bool,
+        #[default = true]
         pub auto_download_java: bool,
         #[default = true]
         pub resource_translation: bool, // only available in zh-Hans
@@ -380,6 +382,8 @@ structstruck::strike! {
     #[default(_code="vec![(\"https://api.ahnumc.org/v1/articles\".to_string(), true),
     (\"https://mc.sjtu.cn/api-sjmcl/article/mua\".to_string(), true)]")]
     pub discover_source_endpoints: Vec<(String, bool)>,
+    #[default(_code="vec![\"wss://center.node.1tmc.top\".to_string()]")]
+    pub terracotta_public_nodes: Vec<String>,
     pub extra_java_paths: Vec<String>,
     pub suppressed_dialogs: Vec<String>,
     pub states: struct States {

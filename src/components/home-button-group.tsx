@@ -20,7 +20,7 @@ import {
 import { useRouter } from "next/router";
 import { cloneElement, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { LuArrowLeftRight, LuPlus, LuSettings } from "react-icons/lu";
+import { LuArrowLeftRight, LuPlus, LuSettings, LuUsers } from "react-icons/lu";
 import { CommonIconButton } from "@/components/common/common-icon-button";
 import { CompactButtonGroup } from "@/components/common/compact-button-group";
 import InstancesView from "@/components/instances-view";
@@ -99,6 +99,7 @@ const ButtonWithPopover: React.FC<CustomButtonProps> = ({
 const HomeButtonGroup = () => {
   const { t } = useTranslation();
   const router = useRouter();
+  const { config } = useLauncherConfig();
   const { openSharedModal } = useSharedModals();
   const { selectedPlayer, selectedInstance, getPlayerList, getInstanceList } =
     useGlobalData();
@@ -173,70 +174,82 @@ const HomeButtonGroup = () => {
         </HStack>
       </Card>
 
-      <Box position="relative">
-        <Button
-          id="main-launch-button"
-          colorScheme="blackAlpha"
-          className={styles["launch-button"]}
-          onClick={() => {
-            if (selectedInstance) {
-              openSharedModal("launch", {
-                instanceId: selectedInstance.id,
-              });
-            }
-          }}
-        >
-          <VStack spacing={1.5} w="100%" color="white">
-            <Text fontSize="lg" fontWeight="bold">
-              {t("LaunchPage.button.launch")}
-            </Text>
-            <Text fontSize="sm" className="ellipsis-text">
-              {selectedInstance
-                ? selectedInstance.name
-                : t("LaunchPage.Text.noSelectedGame")}
-            </Text>
-          </VStack>
-        </Button>
-
-        <Box position="absolute" top={1} right={1}>
-          <CompactButtonGroup
-            colorScheme={useColorModeValue("blackAlpha", "gray")}
-            size="xs"
+      <VStack align="stretch" spacing={2}>
+        {config.general.functionality.showMultiplayerButton && (
+          <Button
+            size="sm"
+            variant="outline"
+            leftIcon={<LuUsers />}
+            onClick={() => router.push("/multiplayer")}
           >
-            {selectedInstance && hasInstances && (
-              <CommonIconButton
-                icon={LuSettings}
-                label={t("LaunchPage.button.instanceSettings")}
-                tooltipPlacement="top"
-                onClick={() =>
-                  router.push({
-                    pathname: "/instances/details/[id]/settings",
-                    query: { id: selectedInstance.id },
-                  })
-                }
-              />
-            )}
-
-            <ButtonWithPopover
-              tooltip={t(
-                `LaunchPage.SwitchButton.tooltip.${hasInstances ? "switchInstance" : "addInstance"}`
-              )}
-              aria-label="instance"
-              popoverContent={
-                <InstancesView
-                  instances={instanceList}
-                  selectedInstance={selectedInstance}
-                  viewType="list"
-                  withMenu={false}
-                />
+            {t("LaunchPage.button.multiplayer")}
+          </Button>
+        )}
+        <Box position="relative">
+          <Button
+            id="main-launch-button"
+            colorScheme="blackAlpha"
+            className={styles["launch-button"]}
+            onClick={() => {
+              if (selectedInstance) {
+                openSharedModal("launch", {
+                  instanceId: selectedInstance.id,
+                });
               }
-              onClick={() => router.push("/instances/list")}
-              showAdd={!hasInstances}
-              onAddClick={() => router.push("/instances/add-import")}
-            />
-          </CompactButtonGroup>
+            }}
+          >
+            <VStack spacing={1.5} w="100%" color="white">
+              <Text fontSize="lg" fontWeight="bold">
+                {t("LaunchPage.button.launch")}
+              </Text>
+              <Text fontSize="sm" className="ellipsis-text">
+                {selectedInstance
+                  ? selectedInstance.name
+                  : t("LaunchPage.Text.noSelectedGame")}
+              </Text>
+            </VStack>
+          </Button>
+
+          <Box position="absolute" top={1} right={1}>
+            <CompactButtonGroup
+              colorScheme={useColorModeValue("blackAlpha", "gray")}
+              size="xs"
+            >
+              {selectedInstance && hasInstances && (
+                <CommonIconButton
+                  icon={LuSettings}
+                  label={t("LaunchPage.button.instanceSettings")}
+                  tooltipPlacement="top"
+                  onClick={() =>
+                    router.push({
+                      pathname: "/instances/details/[id]/settings",
+                      query: { id: selectedInstance.id },
+                    })
+                  }
+                />
+              )}
+
+              <ButtonWithPopover
+                tooltip={t(
+                  `LaunchPage.SwitchButton.tooltip.${hasInstances ? "switchInstance" : "addInstance"}`
+                )}
+                aria-label="instance"
+                popoverContent={
+                  <InstancesView
+                    instances={instanceList}
+                    selectedInstance={selectedInstance}
+                    viewType="list"
+                    withMenu={false}
+                  />
+                }
+                onClick={() => router.push("/instances/list")}
+                showAdd={!hasInstances}
+                onAddClick={() => router.push("/instances/add-import")}
+              />
+            </CompactButtonGroup>
+          </Box>
         </Box>
-      </Box>
+      </VStack>
     </Flex>
   );
 };

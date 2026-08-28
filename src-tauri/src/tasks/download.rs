@@ -58,11 +58,11 @@ pub struct DownloadTask {
 }
 
 impl DownloadTask {
-  async fn resolve_github_url(app_handle: &AppHandle, url: &Url) -> Url {
+  pub(crate) async fn resolve_github_url(app_handle: &AppHandle, url: &Url) -> Url {
     let Some(host) = url.host_str() else {
       return url.clone();
     };
-    if host != "github.com" && host != "raw.githubusercontent.com" {
+    if host != "github.com" && host != "raw.githubusercontent.com" && host != "api.github.com" {
       return url.clone();
     }
     let config = match retrieve_launcher_config(app_handle.clone()) {
@@ -91,7 +91,9 @@ impl DownloadTask {
         let result = client.get(target).send().await;
         result
           .ok()
-          .filter(|response| response.status().is_success() || response.status().is_client_error())
+          .filter(|response| {
+            response.status().is_success() || response.status() == StatusCode::NOT_FOUND
+          })
           .map(|_| (started.elapsed(), mirror.to_string()))
       });
     }

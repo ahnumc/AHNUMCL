@@ -7,6 +7,7 @@ mod launch;
 mod launcher_config;
 mod resource;
 mod tasks;
+mod terracotta;
 mod utils;
 
 use account::helpers::authlib_injector::info::refresh_and_update_auth_servers;
@@ -189,6 +190,14 @@ pub async fn run() {
         extension::commands::retrieve_extension_list,
         extension::commands::add_extension,
         extension::commands::delete_extension,
+        terracotta::terracotta_get_state,
+        terracotta::terracotta_download,
+        terracotta::terracotta_update,
+        terracotta::terracotta_start,
+        terracotta::terracotta_host,
+        terracotta::terracotta_join,
+        terracotta::terracotta_close_room,
+        terracotta::terracotta_stop,
         tasks::commands::schedule_progressive_task_group,
         tasks::commands::cancel_progressive_task,
         tasks::commands::resume_progressive_task,

@@ -155,6 +155,7 @@ export interface LauncherConfig {
       discoverPage: string;
       instancesNavType: string;
       launchPageQuickSwitch: boolean;
+      showMultiplayerButton: boolean;
       autoDownloadJava: boolean;
       resourceTranslation: boolean;
       translatedFilenamePrefix: boolean;
@@ -179,6 +180,7 @@ export interface LauncherConfig {
   localGameDirectories: GameDirectory[];
   globalGameConfig: GameConfig;
   discoverSourceEndpoints: [string, boolean][];
+  terracottaPublicNodes: string[];
   extraJavaPaths: string[];
   suppressedDialogs: string[];
   states: {
@@ -359,6 +361,7 @@ export const defaultConfig: LauncherConfig = {
       discoverPage: "on",
       instancesNavType: "instance",
       launchPageQuickSwitch: true,
+      showMultiplayerButton: true,
       autoDownloadJava: true,
       resourceTranslation: true,
       translatedFilenamePrefix: true,
@@ -386,6 +389,7 @@ export const defaultConfig: LauncherConfig = {
     ["https://api.ahnumc.org/v1/articles", true],
     ["https://mc.sjtu.cn/api-sjmcl/article/mua", true],
   ],
+  terracottaPublicNodes: ["wss://center.node.1tmc.top"],
   extraJavaPaths: [],
   suppressedDialogs: [],
   states: {

@@ -640,6 +640,13 @@
           "description": "Lorsqu'il est désactivé, le lanceur utilise automatiquement le proxy système pour télécharger les ressources"
         }
       }
+    },
+    "terracotta": {
+      "title": "Terracotta",
+      "publicNodes": {
+        "title": "Nœuds publics",
+        "description": "Un nœud public Terracotta par ligne. Laissez vide pour utiliser les nœuds par défaut."
+      }
     }
   },
   "DownloadSpecificResourceModal": {
@@ -1264,6 +1271,10 @@
           "title": "Basculement rapide entre instances et comptes",
           "description": "Si activé, cliquer sur le bouton de changement de la page de lancement permet de choisir directement un compte ou une instance sans changer de page"
         },
+        "showMultiplayerButton": {
+          "title": "Afficher le bouton multijoueur",
+          "description": "Afficher ou masquer le bouton multijoueur Terracotta sur la page de lancement"
+        },
         "autoDownloadJava": {
           "title": "Télécharger automatiquement un runtime Java adapté",
           "description": "Une fois activé, si aucun runtime Java adapté n'est disponible lors de la création d'une nouvelle instance, il sera installé automatiquement dans un répertoire dédié"
@@ -1771,7 +1782,8 @@
   "LaunchPage": {
     "button": {
       "launch": "Lancer le jeu",
-      "instanceSettings": "Configuration de l'instance"
+      "instanceSettings": "Configuration de l'instance",
+      "multiplayer": "Multijoueur Terracotta"
     },
     "SwitchButton": {
       "tooltip": {
@@ -1785,6 +1797,36 @@
       "noSelectedPlayer": "Aucun joueur sélectionné",
       "noSelectedGame": "Aucune instance de jeu sélectionnée"
     }
+  },
+  "TerracottaPage": {
+    "title": "Multijoueur Terracotta",
+    "download": "Télécharger Terracotta",
+    "update": "Mettre à jour",
+    "start": "Démarrer",
+    "stop": "Arrêter",
+    "refresh": "Actualiser",
+    "running": "En cours",
+    "stopped": "Arrêté",
+    "version": "Version installée : {{version}}",
+    "host": "Créer une salle",
+    "join": "Rejoindre une salle",
+    "roomCode": "Code de salle",
+    "lanHint": "Ouvrez votre monde Minecraft en LAN (Échap → Ouvrir au LAN) et choisissez un port avant de créer une salle.",
+    "roomCodeValue": "Code de salle : {{roomCode}}",
+    "copyRoomCode": "Copier le code de salle",
+    "downloadProgress": "Progression du téléchargement : {{progress}} %",
+    "error": "Échec de l’opération Terracotta",
+    "sessionStatus": "État de la session",
+    "notInRoom": "Aucune salle",
+    "connecting": "Connexion en cours",
+    "inRoom": "Dans une salle",
+    "sessionError": "Erreur de session",
+    "serverAddressValue": "Adresse du serveur : {{address}}",
+    "back": "Retour",
+    "openLanTitle": "Ouvrez votre monde en LAN",
+    "players": "Joueurs",
+    "noPlayers": "Aucun joueur connecté",
+    "closeRoom": "Fermer la salle"
   },
   "LaunchProcessModal": {
     "header": {

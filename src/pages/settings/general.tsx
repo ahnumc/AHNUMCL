@@ -227,6 +227,26 @@ const GeneralSettingsPage = () => {
         },
         {
           title: t(
+            "GeneralSettingsPage.functions.settings.showMultiplayerButton.title"
+          ),
+          description: t(
+            "GeneralSettingsPage.functions.settings.showMultiplayerButton.description"
+          ),
+          children: (
+            <Switch
+              colorScheme={primaryColor}
+              isChecked={generalConfigs.functionality.showMultiplayerButton}
+              onChange={(e) => {
+                update(
+                  "general.functionality.showMultiplayerButton",
+                  e.target.checked
+                );
+              }}
+            />
+          ),
+        },
+        {
+          title: t(
             "GeneralSettingsPage.functions.settings.autoDownloadJava.title"
           ),
           description: t(

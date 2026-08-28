@@ -640,6 +640,13 @@
           "description": "此項關閉時，啟動器將自動使用系統代理下載資源"
         }
       }
+    },
+    "terracotta": {
+      "title": "Terracotta",
+      "publicNodes": {
+        "title": "公共節點",
+        "description": "每行填寫一個 Terracotta 公共節點。留空則使用 Terracotta 預設節點。"
+      }
     }
   },
   "DownloadSpecificResourceModal": {
@@ -1264,6 +1271,10 @@
           "title": "快捷切換實例與帳戶",
           "description": "啟用後，點選啟動頁的切換按鈕可直接選擇帳戶或實例，而無需跳轉頁面"
         },
+        "showMultiplayerButton": {
+          "title": "顯示聯機按鈕",
+          "description": "在啟動頁顯示或隱藏 Terracotta 聯機按鈕"
+        },
         "autoDownloadJava": {
           "title": "自動下載可用版本 Java 執行時",
           "description": "啟用後，建立實例時若不存在可用版本的 Java 執行時，將自動安裝至特定目錄"
@@ -1771,7 +1782,8 @@
   "LaunchPage": {
     "button": {
       "launch": "啟動遊戲",
-      "instanceSettings": "實例設定"
+      "instanceSettings": "實例設定",
+      "multiplayer": "Terracotta 聯機"
     },
     "SwitchButton": {
       "tooltip": {
@@ -1785,6 +1797,36 @@
       "noSelectedPlayer": "尚未選擇角色",
       "noSelectedGame": "尚未選擇遊戲實例"
     }
+  },
+  "TerracottaPage": {
+    "title": "Terracotta 聯機",
+    "download": "下載 Terracotta",
+    "update": "更新",
+    "start": "啟動",
+    "stop": "停止",
+    "refresh": "重新整理",
+    "running": "執行中",
+    "stopped": "已停止",
+    "version": "已安裝版本：{{version}}",
+    "host": "建立房間",
+    "join": "加入房間",
+    "roomCode": "房間碼",
+    "lanHint": "請先進入 Minecraft 世界，按 Esc → 對區域網路開放並選擇連接埠，再建立房間。",
+    "roomCodeValue": "房間碼：{{roomCode}}",
+    "copyRoomCode": "複製房間碼",
+    "downloadProgress": "下載進度：{{progress}}%",
+    "error": "Terracotta 操作失敗",
+    "sessionStatus": "聯機狀態",
+    "notInRoom": "未加入房間",
+    "connecting": "連線中",
+    "inRoom": "已在房間中",
+    "sessionError": "聯機錯誤",
+    "serverAddressValue": "伺服器位址：{{address}}",
+    "back": "返回",
+    "openLanTitle": "請先將世界開放至區域網路",
+    "players": "房間使用者",
+    "noPlayers": "暫無使用者連線",
+    "closeRoom": "關閉房間"
   },
   "LaunchProcessModal": {
     "header": {

@@ -14,6 +14,7 @@ import {
   SliderTrack,
   Switch,
   Text,
+  Textarea,
 } from "@chakra-ui/react";
 import { open } from "@tauri-apps/plugin-dialog";
 import { openPath } from "@tauri-apps/plugin-opener";
@@ -451,6 +452,34 @@ const DownloadSettingsPage = () => {
         downloadConfigs.proxy,
         (key, value) => update(`download.proxy.${key}`, value)
       ),
+    },
+    {
+      title: t("DownloadSettingPage.terracotta.title"),
+      items: [
+        {
+          title: t("DownloadSettingPage.terracotta.publicNodes.title"),
+          description: t(
+            "DownloadSettingPage.terracotta.publicNodes.description"
+          ),
+          children: (
+            <Textarea
+              size="sm"
+              rows={3}
+              value={config.terracottaPublicNodes.join("\n")}
+              placeholder="wss://center.node.1tmc.top"
+              onChange={(event) =>
+                update(
+                  "terracottaPublicNodes",
+                  event.target.value
+                    .split(/[,\n]+/)
+                    .map((node) => node.trim())
+                    .filter(Boolean)
+                )
+              }
+            />
+          ),
+        },
+      ],
     },
   ];
 
