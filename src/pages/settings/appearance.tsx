@@ -456,7 +456,7 @@ const AppearanceSettingsPage = () => {
   const PresetBackgroundList = () => {
     const presetBgList = [
       { key: "ahnu-flowy", thumbnail: "ahnu-flowy-thumbnail.webp" },
-      { key: "the-tower", thumbnail: "the-tower-thumbnail.webp" },
+      { key: "ahnu-blocky", thumbnail: "ahnu-blocky-thumbnail.webp" },
       { key: "zheshan-gate", thumbnail: "zheshan-gate-thumbnail.webp" },
     ];
 
