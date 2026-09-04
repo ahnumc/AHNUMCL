@@ -2,6 +2,14 @@
 
 AHNUMCL follows [Semantic Versioning 2.0.0](https://semver.org/).
 
+## 1.0.6
+
+`2026-09-04`
+
+- 🌟 Add built-in Terracotta multiplayer support.
+- 🌟 Add the AHNU Blocky light and dark wallpaper set and replace the former clock-tower wallpapers.
+- 🐛 Use Modrinth as the default discover resource source.
+
 ## 1.0.5
 
 `2026-08-19`
