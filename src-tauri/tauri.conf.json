@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "AHNUMCL",
-  "version": "1.0.6",
+  "version": "0.0.0",
   "identifier": "io.github.ahnumc.ahnumcl",
   "build": {
     "frontendDist": "../out",
