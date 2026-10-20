@@ -196,7 +196,7 @@ export const LauncherConfigContextProvider: React.FC<{
       let src: string;
       if (choice.startsWith("%built-in:")) {
         const builtInKey = choice.replace("%built-in:", "");
-        src = `/images/backgrounds/${builtInKey}-${colorMode}.jpg`;
+        src = `/images/backgrounds/${builtInKey}-${colorMode}.webp`;
       } else {
         const directory = await appDataDir();
         src =
