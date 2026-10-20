@@ -701,6 +701,7 @@
       "mod-update": "Mettre à jour les mods.",
       "retry": "Réessayer",
       "neoforge-libraries": "Bibliothèques d'exécution de NeoForge",
+      "cleanroom-libraries": "Bibliothèques d'exécution de Cleanroom",
       "forge-libraries": "Bibliothèques d'exécution de Forge",
       "optifine-libraries": "Bibliothèques d'exécution d'OptiFine",
       "launcher-update": "Mettre à jour le lanceur",
@@ -1054,6 +1055,12 @@
         },
         "useNativeOpenal": {
           "title": "Utiliser OpenAL du système (Linux uniquement)"
+        },
+        "autoCloseGameCrashWindow": {
+          "title": "Fermer automatiquement la fenêtre signalant un plantage",
+          "disabled": "Ne pas fermer automatiquement",
+          "tenSeconds": "Fermer après 10 secondes",
+          "thirtySeconds": "Fermer après 30 secondes"
         }
       }
     }
@@ -1076,6 +1083,7 @@
       "gameLogs": "Journaux du jeu",
       "help": "Aide"
     },
+    "autoCloseCountdown": "Cette fenêtre se fermera automatiquement dans {{seconds}} secondes (cliquez n'importe où dans la fenêtre pour annuler)",
     "bottomAlert": "Pour obtenir de l'aide, veuillez exporter et envoyer le rapport de crash, et non une capture d'écran de cette fenêtre.",
     "helpUrl": "https://mc.sjtu.cn/sjmcl/en/docs/user-group.html",
     "crashDetails": {
@@ -1641,7 +1649,7 @@
       "error-3": "Le nom de l'instance est trop long"
     },
     "tipsToGlobal": {
-      "content": "Cette instance n'utilise pas de paramètres spécifiques. <terms>Aller aux paramètres globaux du jeu</terms>"
+      "content": "Cette instance n'utilise pas de paramètres spécifiques. <toGlobal>Aller aux paramètres globaux du jeu</toGlobal>"
     }
   },
   "InstanceShaderPacksPage": {
@@ -1944,6 +1952,7 @@
   },
   "OptionItemGroup": {
     "button": {
+      "loadMore": "Charger plus (+{{left}})",
       "showAll": "Tout afficher (+{{left}})"
     }
   },
@@ -2799,7 +2808,7 @@
           }
         }
       },
-      "updateMod": {
+      "updateMods": {
         "error": {
           "title": "Échec de la mise à jour du mod",
           "description": {
@@ -3189,6 +3198,7 @@
       "wave": "Saluer"
     },
     "button": {
+      "saveToLocal": "Enregistrer localement",
       "enableRotation": "Activer la rotation",
       "disableRotation": "Désactiver la rotation",
       "play": "Lire",
@@ -3196,6 +3206,10 @@
     },
     "error": {
       "loadSkin": "加载皮肤失败"
+    },
+    "toast": {
+      "error": "Échec de l’enregistrement local du skin",
+      "success": "Skin enregistré localement"
     }
   },
   "SpotlightSearchModal": {

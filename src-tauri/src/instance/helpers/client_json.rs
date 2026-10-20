@@ -380,7 +380,7 @@ pub fn reset_fields_from_patches(client_info: &mut McClientInfo) {
   };
   let has_forge_patch = patches
     .iter()
-    .any(|patch| matches!(patch.id.as_str(), "forge" | "legacyforge"));
+    .any(|patch| matches!(patch.id.as_str(), "cleanroom" | "forge" | "legacyforge"));
 
   client_info.libraries.clear();
   let mut library_names = HashSet::new();
@@ -522,24 +522,22 @@ pub async fn libraries_to_info(
         loader_version = Some(v.to_string());
         break;
       }
+      ("com.cleanroommc", "cleanroom") => {
+        loader_type = ModLoaderType::Cleanroom;
+        loader_version = Some(v.to_string());
+        break;
+      }
       ("net.neoforged.fancymodloader", _) | ("net.neoforged", "fancymodloader") => {
         loader_type = ModLoaderType::NeoForge;
-        let arguments = client.arguments.clone();
         // ref: https://github.com/HMCL-dev/HMCL/pull/3638/files
-        if let Some(args) = arguments {
-          for (i, item) in args.game.iter().enumerate() {
-            if item.value[0].contains("--fml.neoForgeVersion")
-              || item.value[0].contains("--fml.forgeVersion")
+        if let Some(args) = &client.arguments {
+          for [item, next] in args.game.array_windows::<2>() {
+            if let Some(option) = item.value.first()
+              && (option.contains("--fml.neoForgeVersion") || option.contains("--fml.forgeVersion"))
+              && let Some(version) = next.value.first()
+              && !version.is_empty()
             {
-              let next = args
-                .game
-                .get(i + 1)
-                .and_then(|it| it.value.first())
-                .cloned()
-                .unwrap_or_default();
-              if !next.is_empty() {
-                loader_version = Some(next);
-              }
+              loader_version = Some(version.clone());
             }
           }
         }

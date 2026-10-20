@@ -56,6 +56,7 @@ export interface GameConfig {
     workaround: {
       noJvmArgs: boolean;
       gameFileValidatePolicy: string;
+      autoCloseGameCrashWindow: "tenSeconds" | "thirtySeconds" | "disabled";
       dontCheckJvmValidity: boolean;
       dontPatchNatives: boolean;
       useLwjglUnsafeAgent: boolean;
@@ -268,6 +269,7 @@ export const defaultGameConfig: GameConfig = {
     workaround: {
       noJvmArgs: false,
       gameFileValidatePolicy: "normal",
+      autoCloseGameCrashWindow: "disabled",
       dontCheckJvmValidity: false,
       dontPatchNatives: false,
       useLwjglUnsafeAgent: true,

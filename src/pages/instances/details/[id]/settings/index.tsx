@@ -274,7 +274,7 @@ const InstanceSettingsPage = () => {
             <Trans
               i18nKey="InstanceSettingsPage.tipsToGlobal.content"
               components={{
-                terms: (
+                toGlobal: (
                   <Link
                     color={`${primaryColor}.500`}
                     onClick={() => {

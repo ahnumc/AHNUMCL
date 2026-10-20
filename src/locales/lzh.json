@@ -701,6 +701,7 @@
       "mod-update": "迭更改囊",
       "retry": "復試",
       "neoforge-libraries": "NeoForge 行庫",
+      "cleanroom-libraries": "Cleanroom 行庫",
       "forge-libraries": "Forge 行庫",
       "optifine-libraries": "OptiFine 行庫",
       "launcher-update": "迭更啟者",
@@ -1054,6 +1055,12 @@
         },
         "useNativeOpenal": {
           "title": "啟械網 OpenAL（僅 Linux）"
+        },
+        "autoCloseGameCrashWindow": {
+          "title": "自闔戲潰示警匡",
+          "disabled": "不自闔",
+          "tenSeconds": "十秒後自闔",
+          "thirtySeconds": "三十秒後自闔"
         }
       }
     }
@@ -1076,6 +1083,7 @@
       "gameLogs": "戲誌",
       "help": "助"
     },
+    "autoCloseCountdown": "此匡將於 {{seconds}} 秒後自闔（擊匡中任意處可止）",
     "bottomAlert": "如需尋求他人助，請錄出並傳送潰報告，而非這個匡的截影",
     "helpUrl": "https://mc.sjtu.cn/sjmcl/docs/user-group.html",
     "crashDetails": {
@@ -1641,7 +1649,7 @@
       "error-3": "例名太長"
     },
     "tipsToGlobal": {
-      "content": "今例未啟特定戲置設，<terms>前往全例戲置設</terms>"
+      "content": "今例未啟特定戲置設，<toGlobal>前往全例戲置設</toGlobal>"
     }
   },
   "InstanceShaderPacksPage": {
@@ -1944,6 +1952,7 @@
   },
   "OptionItemGroup": {
     "button": {
+      "loadMore": "續載（+{{left}}）",
       "showAll": "顯全覽（+{{left}}）"
     }
   },
@@ -2799,7 +2808,7 @@
           }
         }
       },
-      "updateMod": {
+      "updateMods": {
         "error": {
           "title": "迭更改囊未成",
           "description": {
@@ -3189,6 +3198,7 @@
       "wave": "揮手"
     },
     "button": {
+      "saveToLocal": "存於本地",
       "enableRotation": "啟旋轉",
       "disableRotation": "禁旋轉",
       "play": "播放",
@@ -3196,6 +3206,10 @@
     },
     "error": {
       "loadSkin": "載入外觀未成"
+    },
+    "toast": {
+      "error": "存外觀於本地未成",
+      "success": "已存外觀於本地"
     }
   },
   "SpotlightSearchModal": {

@@ -17,6 +17,7 @@ use instance::helpers::misc::refresh_and_update_instances;
 use instance::models::misc::Instance;
 use launch::models::LaunchingState;
 use launcher_config::helpers::java::refresh_and_update_javas;
+use launcher_config::helpers::misc::auto_clear_download_cache;
 use launcher_config::models::{JavaInfo, LauncherConfig};
 use resource::helpers::mod_db::{ModDataBase, initialize_mod_db};
 use resource::helpers::translation::LocalModTranslationsCache;
@@ -60,7 +61,6 @@ pub async fn run() {
       .plugin(tauri_plugin_http::init())
       .plugin(tauri_plugin_opener::init())
       .plugin(tauri_plugin_os::init())
-      .plugin(tauri_plugin_process::init())
       .plugin(tauri_plugin_single_instance::init(|app, args, _cwd| {
         let main_window = app.get_webview_window("main").expect("no main window");
         let _ = main_window.show(); // may hide by launcher_visibility settings
@@ -332,6 +332,11 @@ pub async fn run() {
             let _ = utils::logging::purge_old_launcher_logs(app_handle, 30).await;
           });
         }
+
+        let app_handle = app.handle().clone();
+        tauri::async_runtime::spawn(async move {
+          let _ = auto_clear_download_cache(&app_handle).await;
+        });
 
         // On platforms other than macOS, set the menu to empty to hide the default menu.
         // On macOS, some shortcuts depend on default menu: https://github.com/tauri-apps/tauri/issues/12458

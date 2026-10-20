@@ -37,7 +37,10 @@ static KEY_PAIR: OnceLock<(RsaPrivateKey, RsaPublicKey)> = OnceLock::new();
 fn generate_key_pair() -> (RsaPrivateKey, RsaPublicKey) {
   let mut rng = rand_core::OsRng;
   // 4096-bit RSA generation is noticeably slow in unoptimized debug builds.
-  let bits = if cfg!(debug_assertions) { 2048 } else { 4096 };
+  let bits = cfg_select! {
+    debug_assertions => 2048,
+    _ => 4096,
+  };
   let private_key = RsaPrivateKey::new(&mut rng, bits).expect("Failed to generate private key");
   let public_key = RsaPublicKey::from(&private_key);
   (private_key, public_key)
@@ -56,7 +59,7 @@ fn get_public_key() -> String {
 }
 
 fn sign_data(data: &str) -> String {
-  let signing_key = SigningKey::<Sha1>::new_unprefixed(key_pair().0.clone());
+  let signing_key = SigningKey::<Sha1>::new(key_pair().0.clone());
   let signature = signing_key.sign(data.as_bytes());
   general_purpose::STANDARD.encode(signature.to_bytes())
 }
@@ -130,7 +133,7 @@ impl YggdrasilServer {
     let port = find_free_port(Some(18960)).unwrap(); // 饮水思源，爱国荣校
 
     Self {
-      root_url: format!("http://localhost:{}", port),
+      root_url: format!("http://127.0.0.1:{}", port),
       port,
       players: Arc::new(Mutex::new(vec![])),
     }

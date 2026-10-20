@@ -15,7 +15,7 @@ resolver = "3"
 [workspace.package]
 version = "1.0.6"
 edition = "2024"
-rust-version = "1.91.0"
+rust-version = "1.98.1"
 
 [workspace.dependencies]
 async-speed-limit = "0.4.2"
@@ -25,7 +25,7 @@ base64 = "0.22.1"
 cafebabe = "0.8.1"
 chacha20poly1305 = "0.10.1"
 chrono = { version = "0.4.40", features = ["serde"] }
-config = "0.15.18"
+config = { version = "0.15.18", default-features = false, features = ["ini"] }
 csv = "1.3"
 dotenvy = "0.15.7"
 flume = { version = "0.11.1", features = ["async", "select"] }
@@ -48,7 +48,7 @@ jsonwebtoken = { version = "10.3.0", default-features = false, features = [
 ] }
 lazy_static = "1.5"
 log = "0.4"
-mc-server-status = "1.0.0"
+lite-mc-ping = "0.2"
 murmur2 = "0.1"
 native-dialog = "0.9.6"
 pin-project = "1.1.8"
@@ -59,8 +59,8 @@ quote = "1"
 rand = "0.9.3"
 regex = "1.11"
 reqwest-middleware = "0.4.2"
-reqwest-retry = "0.7.0"
-rmcp = { version = "1.7.0", features = [
+reqwest-retry = "0.8.0"
+rmcp = { version = "2.2.0", features = [
   "server",
   "transport-streamable-http-server",
 ] }
@@ -73,7 +73,7 @@ serde_json = "1.0"
 serde_with = "3.12.0"
 sjmcl-macros = { path = "./crates/sjmcl-macros" }
 sjmcl-types = { path = "./crates/sjmcl-types" }
-sha1 = "0.10.1"
+sha1 = { version = "0.10.1", features = ["oid"] }
 sha2 = "0.10.9"
 shlex = "1.3.0"
 smart-default = "0.7.1"
@@ -84,20 +84,19 @@ tar = "0.4"
 syn = { version = "2", features = ["full"] }
 sysinfo = "0.36.0"
 systemstat = "0.2.3"
-tauri = { version = "2.11.1", features = ["protocol-asset", "image-png"] }
-tauri-build = { version = "2.6.1", features = [] }
-tauri-plugin-clipboard-manager = "2.3.2"
+tauri = { version = "2.12.2", features = ["protocol-asset", "image-png"] }
+tauri-build = { version = "2.7.1", features = [] }
+tauri-plugin-clipboard-manager = "2.4.1"
 tauri-plugin-decorum = "1.1.1"
-tauri-plugin-deep-link = "2.4.9"
-tauri-plugin-dialog = "2.7.1"
-tauri-plugin-fs = "2.5.1"
-tauri-plugin-http = { version = "2.5.9", features = ["json", "stream"] }
-tauri-plugin-log = "2.8.0"
-tauri-plugin-opener = "2.5.4"
-tauri-plugin-os = "2.3.2"
-tauri-plugin-process = "2.3.1"
-tauri-plugin-single-instance = { version = "2.4.2", features = ["deep-link"] }
-tauri-plugin-window-state = "2.4.1"
+tauri-plugin-deep-link = "2.6.1"
+tauri-plugin-dialog = "2.8.1"
+tauri-plugin-fs = "2.6.0"
+tauri-plugin-http = { version = "2.8.1", features = ["json", "stream"] }
+tauri-plugin-log = "2.10.0"
+tauri-plugin-opener = "2.7.0"
+tauri-plugin-os = "2.4.0"
+tauri-plugin-single-instance = { version = "2.5.2", features = ["deep-link"] }
+tauri-plugin-window-state = "2.5.0"
 time = { version = "0.3", features = ["formatting", "local-offset"] }
 tokio = { version = "1", features = [
   "rt-multi-thread",
@@ -105,7 +104,6 @@ tokio = { version = "1", features = [
   "fs",
   "io-util",
   "net",
-  "process",
   "sync",
   "time",
 ] }
@@ -187,7 +185,7 @@ java-properties.workspace = true
 jsonwebtoken.workspace = true
 lazy_static.workspace = true
 log.workspace = true
-mc-server-status.workspace = true
+lite-mc-ping.workspace = true
 murmur2.workspace = true
 native-dialog.workspace = true
 pin-project.workspace = true
@@ -225,7 +223,6 @@ tauri-plugin-http.workspace = true
 tauri-plugin-log.workspace = true
 tauri-plugin-opener.workspace = true
 tauri-plugin-os.workspace = true
-tauri-plugin-process.workspace = true
 time.workspace = true
 tokio.workspace = true
 tokio-util.workspace = true

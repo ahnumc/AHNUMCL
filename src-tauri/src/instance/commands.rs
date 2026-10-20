@@ -39,7 +39,8 @@ use crate::instance::helpers::modpack::import::{
   ModpackMetaInfo, extract_overrides, get_download_params,
 };
 use crate::instance::helpers::mods::common::{
-  check_potential_incompatibility, compress_icon, get_mod_info_from_dir, get_mod_info_from_jar,
+  check_potential_incompatibility, compress_icon, discover_local_mod_paths, get_mod_info_from_dir,
+  get_mod_info_from_jar,
 };
 use crate::instance::helpers::options_txt::get_minecraft_lang_tag;
 use crate::instance::helpers::resourcepack::{
@@ -49,14 +50,13 @@ use crate::instance::helpers::server::{
   GameServerInfo, get_servers_nbt_path_by_instance_id, load_servers_info_from_nbt,
   query_servers_online, save_servers_to_nbt,
 };
-use crate::instance::helpers::world::{load_level_data_from_nbt, load_world_info_from_dir};
+use crate::instance::helpers::world::{load_world_data_from_dir, load_world_info_from_dir};
 use crate::instance::models::misc::{
   Instance, InstanceError, InstanceSubdirType, InstanceSummary, LocalModInfo, ModLoader,
   ModLoaderStatus, ModLoaderType, ModpackFileList, OptiFine, ResourcePackInfo, SchematicInfo,
   ScreenshotInfo, ShaderPackInfo,
 };
-use crate::instance::models::world::base::WorldInfo;
-use crate::instance::models::world::level::LevelData;
+use crate::instance::models::world::{WorldDetails, WorldInfo};
 use crate::launch::helpers::file_validator::{get_invalid_assets, get_invalid_library_files};
 use crate::launch::helpers::jre_selector::{get_minimum_java_version_by_game, select_java_runtime};
 use crate::launch::models::LaunchError;
@@ -498,8 +498,9 @@ pub async fn retrieve_world_list(
     };
   if let Ok(world_paths) = get_subdirectories(worlds_dir) {
     for path in world_paths {
-      if let Ok(info) = load_world_info_from_dir(&path, has_difficulty_support).await {
-        world_list.push(info);
+      match load_world_info_from_dir(&path, has_difficulty_support).await {
+        Ok(info) => world_list.push(info),
+        Err(err) => log::warn!("Failed to read world at {}: {:?}", path.display(), err),
       }
     }
   }
@@ -611,17 +612,13 @@ pub async fn retrieve_local_mod_list(
     None => return Ok(Vec::new()),
   };
 
-  let valid_extensions = RegexBuilder::new(r"\.(jar|zip)(\.disabled)*$")
-    .case_insensitive(true)
-    .build()
-    .unwrap();
-
-  let mod_paths = get_files_with_regex(&mods_dir, &valid_extensions).unwrap_or_default();
+  let mod_paths = discover_local_mod_paths(&mods_dir, installed_loader_type);
   let mut tasks = Vec::new();
   let semaphore = Arc::new(Semaphore::new(
     std::thread::available_parallelism().map_or(1, std::num::NonZeroUsize::get),
   ));
   for path in mod_paths {
+    let relative_path = path.strip_prefix(&mods_dir).unwrap_or(&path).to_path_buf();
     let permit = semaphore
       .clone()
       .acquire_owned()
@@ -629,19 +626,28 @@ pub async fn retrieve_local_mod_list(
       .map_err(|_| InstanceError::SemaphoreAcquireFailed)?;
     let task = tokio::spawn(async move {
       log::debug!("Load mod info from jar: {}", path.display());
-      let info = get_mod_info_from_jar(&path, installed_loader_type)
+      let mut info = get_mod_info_from_jar(&path, installed_loader_type)
         .await
-        .ok();
+        .ok()?;
+      info.relative_path = relative_path;
       drop(permit);
-      info
+      Some(info)
     });
     tasks.push(task);
   }
   #[cfg(debug_assertions)]
   {
     // mod information detection from folders is only used for debugging.
-    let mod_paths = get_subdirectories(&mods_dir).unwrap_or_default();
+    let mod_paths = get_subdirectories(&mods_dir)
+      .unwrap_or_default()
+      .into_iter()
+      .filter(|path| {
+        path
+          .file_name()
+          .is_some_and(|name| !name.to_string_lossy().eq_ignore_ascii_case(".connector"))
+      });
     for path in mod_paths {
+      let relative_path = path.strip_prefix(&mods_dir).unwrap_or(&path).to_path_buf();
       let permit = semaphore
         .clone()
         .acquire_owned()
@@ -649,11 +655,12 @@ pub async fn retrieve_local_mod_list(
         .map_err(|_| InstanceError::SemaphoreAcquireFailed)?;
       let task = tokio::spawn(async move {
         log::debug!("Load mod info from dir: {}", path.display());
-        let info = get_mod_info_from_dir(&path, installed_loader_type)
+        let mut info = get_mod_info_from_dir(&path, installed_loader_type)
           .await
-          .ok();
+          .ok()?;
+        info.relative_path = relative_path;
         drop(permit);
-        info
+        Some(info)
       });
       tasks.push(task);
     }
@@ -696,13 +703,14 @@ pub async fn retrieve_local_mod_list(
   let local_mod_translations_cache_state = app.state::<Mutex<LocalModTranslationsCache>>();
   let mut cache = local_mod_translations_cache_state.lock()?;
   for info in mod_infos.iter() {
-    if let Some(entry) = cache.translations.get(&info.file_name)
+    let cache_key = info.file_path.to_string_lossy().to_string();
+    if let Some(entry) = cache.translations.get(&cache_key)
       && !entry.is_expired(LOCAL_MOD_TRANSLATION_CACHE_EXPIRY_HOURS)
     {
       continue;
     }
     cache.translations.insert(
-      info.file_name.clone(),
+      cache_key,
       LocalModTranslationEntry::new(
         info.translated_name.clone(),
         info.translated_description.clone(),
@@ -979,21 +987,14 @@ pub async fn retrieve_world_details(
   app: AppHandle,
   instance_id: String,
   world_name: String,
-) -> SJMCLResult<LevelData> {
+) -> SJMCLResult<WorldDetails> {
   let worlds_dir =
     match get_instance_subdir_path_by_id(&app, &instance_id, &InstanceSubdirType::Saves) {
       Some(path) => path,
       None => return Err(InstanceError::WorldNotExistError.into()),
     };
-  let level_path = worlds_dir.join(world_name).join("level.dat");
-  if tokio::fs::metadata(&level_path).await.is_err() {
-    return Err(InstanceError::LevelNotExistError.into());
-  }
-  if let Ok(level_data) = load_level_data_from_nbt(&level_path).await {
-    Ok(level_data)
-  } else {
-    Err(InstanceError::LevelParseError.into())
-  }
+  let world_dir = worlds_dir.join(world_name);
+  load_world_data_from_dir(&world_dir).await
 }
 
 #[tauri::command]
@@ -1168,7 +1169,8 @@ pub async fn create_instance(
     if let Err(err) = select_java_runtime(&app, None, &instance, client_java_version).await
       && err.0 == LaunchError::NoSuitableJava.to_string()
     {
-      let minimum_java_version = get_minimum_java_version_by_game(&app, &instance, false).await;
+      let minimum_java_version =
+        get_minimum_java_version_by_game(&app, &instance, client_java_version, false).await;
       let minimum_java_version = minimum_java_version.to_string();
       task_params.extend(build_mojang_java_download_params(&app, &minimum_java_version).await?);
       java_version_to_download = Some(minimum_java_version);

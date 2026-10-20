@@ -701,6 +701,7 @@
       "mod-update": "モッドを更新",
       "retry": "再試行",
       "neoforge-libraries": "NeoForge ランタイムライブラリ",
+      "cleanroom-libraries": "Cleanroom ランタイムライブラリ",
       "forge-libraries": "Forge ランタイムライブラリ",
       "optifine-libraries": "OptiFine ランタイムライブラリ",
       "launcher-update": "ランチャーを更新",
@@ -1054,6 +1055,12 @@
         },
         "useNativeOpenal": {
           "title": "システム OpenAL を利用（Linux のみ）"
+        },
+        "autoCloseGameCrashWindow": {
+          "title": "クラッシュ通知ウィンドウを自動で閉じる",
+          "disabled": "自動で閉じない",
+          "tenSeconds": "10秒後に自動で閉じる",
+          "thirtySeconds": "30秒後に自動で閉じる"
         }
       }
     }
@@ -1076,6 +1083,7 @@
       "gameLogs": "ゲームログ",
       "help": "サポート"
     },
+    "autoCloseCountdown": "このウィンドウは {{seconds}} 秒後に自動で閉じられます（ウィンドウ内の任意の場所をクリックするとキャンセル）",
     "bottomAlert": "サポートを問い合わせる場合は、「このウィンドウのスクリーンショット」ではなく、クラッシュレポートをエクスポートし、相手に送信してください。",
     "helpUrl": "https://mc.sjtu.cn/sjmcl/en/docs/user-group.html",
     "crashDetails": {
@@ -1641,7 +1649,7 @@
       "error-3": "インスタンス名が長すぎる"
     },
     "tipsToGlobal": {
-      "content": "このインスタンスでは個別設定が有効になっていません。<terms>グローバルゲーム設定へ</terms>"
+      "content": "このインスタンスでは個別設定が有効になっていません。<toGlobal>グローバルゲーム設定へ</toGlobal>"
     }
   },
   "InstanceShaderPacksPage": {
@@ -1944,6 +1952,7 @@
   },
   "OptionItemGroup": {
     "button": {
+      "loadMore": "さらに読み込む（+{{left}}）",
       "showAll": "すべて表示（+{{left}}）"
     }
   },
@@ -2799,7 +2808,7 @@
           }
         }
       },
-      "updateMod": {
+      "updateMods": {
         "error": {
           "title": "モッドの更新に失敗",
           "description": {
@@ -3189,6 +3198,7 @@
       "wave": "手を振る"
     },
     "button": {
+      "saveToLocal": "ローカルに保存",
       "enableRotation": "回転を有効化",
       "disableRotation": "回転を無効化",
       "play": "再生",
@@ -3196,6 +3206,10 @@
     },
     "error": {
       "loadSkin": "スキンのロードに失敗"
+    },
+    "toast": {
+      "error": "スキンのローカル保存に失敗しました",
+      "success": "スキンをローカルに保存しました"
     }
   },
   "SpotlightSearchModal": {

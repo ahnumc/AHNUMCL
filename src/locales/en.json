@@ -701,6 +701,7 @@
       "mod-update": "Update Mod",
       "retry": "Retry",
       "neoforge-libraries": "NeoForge Libraries",
+      "cleanroom-libraries": "Cleanroom Libraries",
       "forge-libraries": "Forge Libraries",
       "optifine-libraries": "OptiFine Libraries",
       "launcher-update": "Update Launcher",
@@ -1054,6 +1055,12 @@
         },
         "useNativeOpenal": {
           "title": "Use System OpenAL(Linux Only)"
+        },
+        "autoCloseGameCrashWindow": {
+          "title": "Automatically close the crash notification window",
+          "disabled": "Do not auto-close",
+          "tenSeconds": "Close after 10 seconds",
+          "thirtySeconds": "Close after 30 seconds"
         }
       }
     }
@@ -1076,6 +1083,7 @@
       "gameLogs": "Game Logs",
       "help": "Help"
     },
+    "autoCloseCountdown": "This window will close automatically in {{seconds}} seconds (click anywhere in the window to cancel)",
     "bottomAlert": "Export and send the crash report instead of a screenshot of this page for help.",
     "helpUrl": "https://mc.sjtu.cn/sjmcl/en/docs/user-group.html",
     "crashDetails": {
@@ -1641,7 +1649,7 @@
       "error-3": "Instance name is too long"
     },
     "tipsToGlobal": {
-      "content": "This instance is not using specific settings. <terms>Go to Global Game Settings</terms>"
+      "content": "This instance is not using specific settings. <toGlobal>Go to Global Game Settings</toGlobal>"
     }
   },
   "InstanceShaderPacksPage": {
@@ -1944,6 +1952,7 @@
   },
   "OptionItemGroup": {
     "button": {
+      "loadMore": "Load More (+{{left}})",
       "showAll": "Show All (+{{left}})"
     }
   },
@@ -2037,10 +2046,10 @@
       "CurseForge": {
         "All": "All",
         "Addons": "Addons",
-        "Adventure and RPG": "Adventure RPG",
-        "API and Library": "API Library",
+        "Adventure and RPG": "Adventure and RPG",
+        "API and Library": "API and Library",
         "Applied Energistics 2": "Applied Energistics 2",
-        "Armor, Tools, and Weapons": "Armor Tools Weapons",
+        "Armor, Tools, and Weapons": "Armor, Tools, and Weapons",
         "Automation": "Automation",
         "Biomes": "Biomes",
         "Blood Magic": "Blood Magic",
@@ -2052,7 +2061,7 @@
         "Dimensions": "Dimensions",
         "Education": "Education",
         "Energy": "Energy",
-        "Energy, Fluid, and Item Transport": "Energy Fluid Item Transport",
+        "Energy, Fluid, and Item Transport": "Energy, Fluid, and Item Transport",
         "Farming": "Farming",
         "Food": "Food",
         "Forestry": "Forestry",
@@ -2064,7 +2073,7 @@
         "Magic": "Magic",
         "Map and Information": "Map Information",
         "MCreator": "MCreator",
-        "Miscellaneous": "Misc.",
+        "Miscellaneous": "Miscellaneous",
         "Mobs": "Mobs",
         "Ores and Resources": "Ores Resources",
         "Performance": "Performance",
@@ -2080,8 +2089,8 @@
         "Thermal Expansion": "Thermal Expansion",
         "Tinker's Construct": "Tinker's Construct",
         "Twilight Forest": "Twilight Forest",
-        "Twitch Integration": "Twitch",
-        "Utility & QoL": "Utility QoL",
+        "Twitch Integration": "Twitch Integration",
+        "Utility & QoL": "Utility & QoL",
         "World Gen": "World Gen",
         "Auxiliary": "Auxiliary",
         "World": "World"
@@ -2138,7 +2147,7 @@
         "Data Packs": "Data Packs",
         "Font Packs": "Font Packs",
         "Medieval": "Medieval",
-        "Miscellaneous": "Misc.",
+        "Miscellaneous": "Miscellaneous",
         "Mod Support": "Mod Support",
         "Modern": "Modern",
         "Photo Realistic": "Photo Realistic",
@@ -2148,13 +2157,13 @@
       "Modrinth": {
         "All": "All",
         "Resolution": "Resolution",
-        "8x-": "8x or Lower",
+        "8x-": "8x or lower",
         "16x": "16x",
         "32x": "32x",
         "64x": "64x",
         "128x": "128x",
         "256x": "256x",
-        "512x+": "512x or Higher",
+        "512x+": "512x or higher",
         "Styles": "Styles",
         "audio": "Audio",
         "blocks": "Blocks",
@@ -2176,7 +2185,7 @@
         "themed": "Themed",
         "tweaks": "Tweaks",
         "utility": "Utility",
-        "vanilla-like": "Vanilla-like"
+        "vanilla-like": "Vanilla Like"
       }
     },
     "shaderTagList": {
@@ -2194,8 +2203,8 @@
         "cursed": "Cursed",
         "fantasy": "Fantasy",
         "realistic": "Realistic",
-        "semi-realistic": "Semi-Realistic",
-        "vanilla-like": "Vanilla-like",
+        "semi-realistic": "Semi Realistic",
+        "vanilla-like": "Vanilla Like",
         "atmosphere": "Atmosphere",
         "bloom": "Bloom",
         "colored-lighting": "Colored Lighting",
@@ -2205,7 +2214,7 @@
         "reflections": "Reflections",
         "shadows": "Shadows",
         "potato": "Potato",
-        "performance": "Performance",
+        "performance": "Performance impact",
         "low": "Low",
         "medium": "Medium",
         "high": "High",
@@ -2216,11 +2225,11 @@
       "CurseForge": {
         "All": "All",
         "Styles": "Styles",
-        "Adventure and RPG": "Adventure RPG",
-        "Combat / PvP": "Combat PvP",
+        "Adventure and RPG": "Adventure and RPG",
+        "Combat / PvP": "Combat / PvP",
         "Exploration": "Exploration",
         "Extra Large": "Extra Large",
-        "FTB Official Pack": "FTB",
+        "FTB Official Pack": "FTB Official Pack",
         "Hardcore": "Hardcore",
         "Horror": "Horror",
         "Magic": "Magic",
@@ -2230,7 +2239,7 @@
         "Quests": "Quests",
         "Sci-Fi": "Sci-Fi",
         "Skyblock": "Skyblock",
-        "Small / Light": "Small Light",
+        "Small / Light": "Small / Light",
         "Tech": "Tech",
         "Vanilla+": "Vanilla+"
       },
@@ -2254,7 +2263,7 @@
         "All": "All",
         "Styles": "Styles",
         "Magic": "Magic",
-        "Miscellaneous": "Misc.",
+        "Miscellaneous": "Miscellaneous",
         "Fantasy": "Fantasy",
         "Mod Support": "Mod Support",
         "Tech": "Tech",
@@ -2799,7 +2808,7 @@
           }
         }
       },
-      "updateMod": {
+      "updateMods": {
         "error": {
           "title": "Failed to download latest mod",
           "description": {
@@ -3189,6 +3198,7 @@
       "wave": "Wave"
     },
     "button": {
+      "saveToLocal": "Save Locally",
       "enableRotation": "Enable Rotation",
       "disableRotation": "Disable Rotation",
       "play": "Play",
@@ -3196,6 +3206,10 @@
     },
     "error": {
       "loadSkin": "Failed to load skin"
+    },
+    "toast": {
+      "error": "Failed to save skin locally",
+      "success": "Skin saved locally"
     }
   },
   "SpotlightSearchModal": {

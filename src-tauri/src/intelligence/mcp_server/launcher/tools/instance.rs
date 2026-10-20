@@ -118,6 +118,7 @@ pub fn tool_routes() -> Vec<ToolRoute<McpContext>> {
             "/images/icons/YellowGlazedTerracotta.png",
             "/images/icons/Anvil.png",
             "/images/icons/Forge.png",
+            "/images/icons/Cleanroom.png",
             "/images/icons/Fabric.png",
             "/images/icons/NeoForge.png",
             "/images/icons/Quilt.png",
@@ -147,7 +148,7 @@ pub fn tool_routes() -> Vec<ToolRoute<McpContext>> {
         icon_src: Option<String>,
         #[schemars(description = "Minecraft game version ID, for example `1.21.5`.")]
         game_version: String,
-        #[schemars(description = "Optional mod loader type: `unknown`, `fabric`, `forge`, `legacyforge`, `neoforge`, or `quilt`. Defaults to `unknown`.")]
+        #[schemars(description = "Optional mod loader type: `unknown`, `fabric`, `forge`, `cleanroom`, `legacyforge`, `neoforge`, or `quilt`. Defaults to `unknown`.")]
         mod_loader_type: Option<String>,
         #[schemars(description = "Optional exact mod loader version. If omitted, the first stable loader version is used.")]
         mod_loader_version: Option<String>,
@@ -224,7 +225,7 @@ pub fn tool_routes() -> Vec<ToolRoute<McpContext>> {
     mcp_tool!(
       "retrieve_world_details",
       retrieve_world_details,
-      "Retrieve detailed level.dat data for a local world in a Minecraft instance.",
+      "Retrieve world NBT data keyed by relative file path, including level.dat and available external metadata.",
       #[serde(deny_unknown_fields)]
       {
         #[schemars(description = "Minecraft instance ID returned by `retrieve_instance_list`.")]

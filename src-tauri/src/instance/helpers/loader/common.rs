@@ -7,6 +7,7 @@ use tauri::AppHandle;
 use zip::ZipArchive;
 
 use crate::instance::helpers::client_json::{LibrariesValue, McClientInfo};
+use crate::instance::helpers::loader::cleanroom::install_cleanroom_loader;
 use crate::instance::helpers::loader::fabric::install_fabric_loader;
 use crate::instance::helpers::loader::forge::{InstallProfile, install_forge_loader};
 use crate::instance::helpers::loader::neoforge::install_neoforge_loader;
@@ -15,6 +16,7 @@ use crate::instance::helpers::misc::get_instance_game_config;
 use crate::instance::models::misc::{Instance, InstanceError, ModLoader, ModLoaderType};
 use crate::launch::helpers::file_validator::merge_library_lists;
 use crate::launch::helpers::jre_selector::select_java_runtime;
+use crate::launch::helpers::misc::get_separator;
 use crate::resource::models::SourceType;
 use crate::tasks::PTaskParam;
 
@@ -75,6 +77,9 @@ pub async fn install_mod_loader(
     ModLoaderType::Forge => {
       install_forge_loader(priority, game_version, loader, lib_dir.clone(), task_params).await
     }
+    ModLoaderType::Cleanroom => {
+      install_cleanroom_loader(priority, loader, lib_dir.clone(), task_params).await
+    }
     ModLoaderType::NeoForge => {
       install_neoforge_loader(priority, loader, lib_dir, task_params).await
     }
@@ -127,10 +132,7 @@ pub async fn execute_processors(
     let mut classpath_arr = processor.classpath.clone();
     classpath_arr.push(processor_path.to_string_lossy().to_string());
 
-    #[cfg(target_os = "windows")]
-    let classpath = classpath_arr.join(";");
-    #[cfg(not(target_os = "windows"))]
-    let classpath = classpath_arr.join(":");
+    let classpath = classpath_arr.join(get_separator());
 
     let args = &processor.args;
 

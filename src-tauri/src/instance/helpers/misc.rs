@@ -12,6 +12,7 @@ use zip::ZipArchive;
 
 use crate::instance::helpers::client_jar::load_game_version_from_jar;
 use crate::instance::helpers::client_json::{McClientInfo, libraries_to_info, patches_to_info};
+use crate::instance::helpers::loader::cleanroom::download_cleanroom_libraries;
 use crate::instance::helpers::loader::forge::download_forge_libraries;
 use crate::instance::helpers::loader::neoforge::download_neoforge_libraries;
 use crate::instance::helpers::loader::optifine::download_optifine_libraries;
@@ -176,6 +177,11 @@ async fn refresh_instance(
               cfg_read.mod_loader.status = ModLoaderStatus::Downloading;
               download_forge_libraries(app, &priority_list, &cfg_read, &mut client_data).await?;
             }
+            ModLoaderType::Cleanroom => {
+              cfg_read.mod_loader.status = ModLoaderStatus::Downloading;
+              download_cleanroom_libraries(app, &priority_list, &cfg_read, &mut client_data)
+                .await?;
+            }
             ModLoaderType::NeoForge => {
               cfg_read.mod_loader.status = ModLoaderStatus::Downloading;
               download_neoforge_libraries(app, &priority_list, &cfg_read, &mut client_data).await?;
@@ -193,6 +199,10 @@ async fn refresh_instance(
           ModLoaderType::Forge => {
             cfg_read.mod_loader.status = ModLoaderStatus::Downloading;
             download_forge_libraries(app, &priority_list, &cfg_read, &mut client_data).await
+          }
+          ModLoaderType::Cleanroom => {
+            cfg_read.mod_loader.status = ModLoaderStatus::Downloading;
+            download_cleanroom_libraries(app, &priority_list, &cfg_read, &mut client_data).await
           }
           ModLoaderType::NeoForge => {
             cfg_read.mod_loader.status = ModLoaderStatus::Downloading;
@@ -446,10 +456,10 @@ pub fn create_instance_shortcut_icon(
   let square = image::open(overlay)?.resize_exact(42, 42, image::imageops::FilterType::Lanczos3);
   image::imageops::overlay(&mut img, &square, 80, 80);
 
-  #[cfg(target_os = "windows")]
-  let icon_name = "icon.ico";
-  #[cfg(target_os = "linux")]
-  let icon_name = "icon.png";
+  let icon_name = cfg_select! {
+    windows => "icon.ico",
+    _ => "icon.png",
+  };
 
   let icon_path = instance.version_path.join(icon_name);
   img.save(&icon_path)?;
