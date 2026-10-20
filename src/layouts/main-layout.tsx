@@ -295,10 +295,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
       bgBlendMode={isBgDarken ? "darken" : "normal"}
       {...(config.basicInfo.osType === "linux" && linuxBorderStyle)}
       overflow="hidden"
-      style={{
-        ...getGlobalExtraStyle(config),
-        opacity: config.appearance.background.windowOpacity / 100,
-      }}
+      style={getGlobalExtraStyle(config)}
     >
       <WindowTitlebar />
       <Box
