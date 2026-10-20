@@ -19,6 +19,7 @@ AHNUMCL follows [Semantic Versioning 2.0.0](https://semver.org/).
 - 🛠 Replace the server-status query library and update Minecraft version lists and mod metadata.
 - 📦 Update Tauri, Next.js, MCP and related dependencies, address Rust dependency security advisories, and raise the minimum Rust version to 1.98.1.
 - 📦 Align the frontend and Rust clipboard and filesystem plugin versions to fix Tauri release builds.
+- 📦 Pin compatible deep-link and single-instance plugins to fix Linux release builds.
 
 ## 1.0.6
 

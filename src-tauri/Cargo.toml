@@ -88,14 +88,16 @@ tauri = { version = "2.12.2", features = ["protocol-asset", "image-png"] }
 tauri-build = { version = "2.7.1", features = [] }
 tauri-plugin-clipboard-manager = "2.5.0"
 tauri-plugin-decorum = "1.1.1"
-tauri-plugin-deep-link = "2.6.1"
+# 2.6.2 fails to compile on Linux with rust-ini's ParseOption.
+tauri-plugin-deep-link = "=2.6.1"
 tauri-plugin-dialog = "2.8.1"
 tauri-plugin-fs = "2.7.1"
 tauri-plugin-http = { version = "2.8.1", features = ["json", "stream"] }
 tauri-plugin-log = "2.10.0"
 tauri-plugin-opener = "2.7.0"
 tauri-plugin-os = "2.4.0"
-tauri-plugin-single-instance = { version = "2.5.2", features = ["deep-link"] }
+# 2.5.4 requires the broken deep-link 2.6.2.
+tauri-plugin-single-instance = { version = "=2.5.3", features = ["deep-link"] }
 tauri-plugin-window-state = "2.5.0"
 time = { version = "0.3", features = ["formatting", "local-offset"] }
 tokio = { version = "1", features = [
