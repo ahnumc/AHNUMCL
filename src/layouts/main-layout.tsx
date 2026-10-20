@@ -48,6 +48,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   const isStandAlone = router.pathname.startsWith("/standalone");
   const { config, update, bgImageSrc, isBgDarken } = useLauncherConfig();
   const primaryColor = config.appearance.theme.primaryColor;
+  const windowOpacity = config.appearance.background.windowOpacity / 100;
   const { openGenericConfirmDialog } = useSharedModals();
 
   const isStartupFlowStarted = useRef(false);
@@ -287,19 +288,29 @@ const MainLayout = ({ children }: MainLayoutProps) => {
     <Flex
       direction="column"
       h="100vh"
-      bgImg={`url('${bgImageSrc}')`}
-      bgSize="cover"
-      bgPosition="center"
-      bgRepeat="no-repeat"
-      bgColor={isBgDarken ? "rgba(0,0,0,0.45)" : "transparent"}
-      bgBlendMode={isBgDarken ? "darken" : "normal"}
+      position="relative"
       {...(config.basicInfo.osType === "linux" && linuxBorderStyle)}
       overflow="hidden"
       style={getGlobalExtraStyle(config)}
     >
-      <WindowTitlebar />
+      <Box
+        position="absolute"
+        inset={0}
+        bgImg={`url('${bgImageSrc}')`}
+        bgSize="cover"
+        bgPosition="center"
+        bgRepeat="no-repeat"
+        bgColor={isBgDarken ? "rgba(0,0,0,0.45)" : "transparent"}
+        bgBlendMode={isBgDarken ? "darken" : "normal"}
+        opacity={windowOpacity}
+        pointerEvents="none"
+      />
+      <Box position="relative" zIndex={1}>
+        <WindowTitlebar />
+      </Box>
       <Box
         position="relative"
+        zIndex={1}
         display="flex"
         flex="1"
         flexDir="column"

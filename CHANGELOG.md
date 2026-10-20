@@ -2,6 +2,23 @@
 
 AHNUMCL follows [Semantic Versioning 2.0.0](https://semver.org/).
 
+## 1.1.0
+
+`2026-10-20`
+
+- 🌟 Support installing and managing the Cleanroom loader, with matching Java runtime selection and download requirements.
+- 🌟 Add liquid glass effects to launch-page buttons and support saving skin images from the skin viewer.
+- 🌟 Support automatically closing the game crash notification window after a configurable delay.
+- 🐛 Restore built-in WebP wallpapers and fix the window opacity slider by applying opacity to the wallpaper layer while keeping text and controls readable.
+- 🐛 Support Minecraft 26.x world data and Quilt modpacks with optional metadata fields omitted.
+- 🐛 Fix mod management in supported loader subdirectories, file paths after enabling or disabling mods, and the mod update dialog.
+- 🐛 Fix local account custom skins in NeoForge instances and preserve resource-pack caches when world loading fails.
+- 🐛 Fix startup dialog ordering and avatar layout for long player names, and open account settings when launching without an account.
+- 🚀 Reduce unnecessary rendering with lazy accordion sections and incremental mod-version loading, and avoid duplicate mod metadata parsing.
+- 🚀 Automatically clean up stale download caches on startup.
+- 🛠 Replace the server-status query library and update Minecraft version lists and mod metadata.
+- 📦 Update Tauri, Next.js, MCP and related dependencies, address Rust dependency security advisories, and raise the minimum Rust version to 1.98.1.
+
 ## 1.0.6
 
 `2026-09-04`
